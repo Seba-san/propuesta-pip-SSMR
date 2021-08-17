@@ -1,0 +1,120 @@
+\documentclass[12pt,a4paper,onecolumn]{article}%{IEEEtran} % altura de letra=10, conferencia, 
+
+\usepackage[utf8]{inputenc}%acentos sin codigo extra \usepackage[utf8]{inputenc}
+\usepackage[spanish,es-noshorthands,es-tabla]{babel} %agrega unos caracteres extra al spanish de babel
+%\include{include}
+\input{./include}
+\DeclareGraphicsExtensions{.eps,.png}
+\author{Sansoni Sebastian}
+
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{teorema}{Teorema}[section]
+\AtBeginDocument{%
+    \LetLtxMacro\oldref{\ref}%
+    \DeclareRobustCommand{\ref}[2][]{(\oldref#1{#2})}%
+}
+
+%AGREGAR ENCABEZADO con versión, número de tp y la cantidad de hojas puesta así, por ej: 5/12.
+%\lhead[\thepage]{. }
+\chead[V1.0]{ V1.0}
+\rhead[\thepage]{\thepage}
+
+\begin{document}
+
+%\maketitle
+\begin{center}
+\begin{Large}
+Control de trayectoria para un robot móvil de cuatro ruedas en configuración skid-steering  
+\end{Large}
+\end{center}
+
+\section{Objetivos}
+El objetivo general de este trabajo es desarrollar e implementar una librería, basada en sistemas de código abierto, para simular un robot de cuatro ruedas de dirección deslizante con tracción independiente en cada rueda. Esta librería estará enfocada en el desarrollo y testeo de algoritmos de control y planeación de trayectorias para estos tipos de vehículos. 
+\subsection{Objetivos Específicos}
+\begin{itemize}
+\item Implementar un modelo tridimensional dentro del entorno de simulación.
+\item Obtener el modelo cinemático el vehículo.
+\item Plantear una estrategia de control lineal para hacer seguimiento de trayectorias. 
+\item Adquirir el manejo necesario de nuevas herramientas a utilizar.
+\item Documentar el trabajo realizado y garantizar que el mismo pueda ser replicable en el futuro.
+\end{itemize}
+\section{Fundamentos}
+A la hora de desarrollar e implementar dispositivos móviles que involucran interacciones con el medio ambiente surgen desafíos imprevistos. Generalmente las aplicaciones que involucran robots, se testean en un entorno controlado, lo cual conlleva a que ese ensayo no represente correctamente el entorno en donde va a desempeñar tareas normalmente. 
+
+Por ejemplo,  cuando se desea testear un algoritmo en un robot móvil, es necesario trasladar el dispositivo al lugar específico de testeo, mantener la carga de las baterías estable durante todo el ensayo, garantizar que las condiciones ambientales sean comunes, entre otras complejidades observadas en el ciclo de desarrollo de un dispositivo que va a operar en ambientes externos.
+
+Otro desafío que aparece normalmente en las conferencias y en los artículos de investigación es que los resultados mostrados son difícilmente replicables, ya sea porque no se cuenta con el dispositivo en si mismo, o porque no está disponible el código y las bases de datos con las cuales se llevó a cabo el ensayo \cite{bon}. 
+
+%Los simuladores han jugado un rol crítico en aplicaciones en donde se involucran robots, ya que son una herramienta rápida y eficiente de testear nuevos conceptos, estrategias y algoritmos.
+
+Muchas de estas dificultades se pueden minimizar incluyendo dentro del ciclo de desarrollo e implementación el uso de simuladores que simulen la dinámica de los cuerpos rígidos en entornos 3D. Estos simuladores, a través de un motor físico  además de resolver las ecuaciones que modelan el problema, incluyen las interacciones con el medio y con otros objetos mediante coeficientes de fricción entre superficies y amortiguamiento viscoso \cite{ode}.
+
+Actualmente existen numerosos software de simulación como  V-REP \cite{vrep}, Gazebo \cite{gazebo}  y Webots \cite{webots}, que incluyen tanto un motor físico, motor gráfico, interacción con sensores, entre otros aspectos que facilitan la simulación de robots y sus sensores en entornos tridimencionales. Siendo los más conocidos  Gazebo y V-REP.  
+
+Por otro lado el Grupo de Investigación en Vehículos y Sistemas Inteligentes (GIVSI) de la Universidad Nacional del Comahue (UNCo) se encuentra desarrollando un vehículo eléctrico de cuatro ruedas fijas con tracción independiente en cada una. El objetivo de este vehículo es que pueda desarrollar tareas dentro de un ambiente agrícola. *[Poner referencias a pip's realizadas, proyectos de investigación, etc.]* Imagenes?
+
+Los robots que tienen cuatro ruedas con dirección deslizante (4WD SSMR , del inglés four wheel drive skid steering mobile robot) % del tipo skid-steering
+ son utilizados típicamente como vehículos todo terreno, debido a que se desempeñan satisfactoriamente en superficies de difícil tránsito. En particular esto se debe a una estructura mecánica robusta. Esta ventaja conlleva a que cuando el vehículo cambia su orientación, aparece un deslizamiento lateral entre las ruedas y el suelo . Esto agrega una complejidad el sistema de control ya que se debe tener en cuenta las propiedades dinámicas del sistema \cite{pazderski2004practical}.     
+
+
+ Es por estos motivos que se propone modelar, identificar e implementar un modelo tridimensional de este vehículo dentro de un entorno de simulación, para luego proponer  estrategias de planeamiento de trayectoria.  
+ 
+%En la literatura hay muchas cosas desarrolladas, sin embargo muy poco en habla hispana. El tema aún está en en desarrollo, ya que hay recientes trabajos que lo introducen como problematica. \cite{snow}. \href{https://youtu.be/FjrgZMmWTNI}{\underline{\color{blue} video}} 
+  
+\section{Factibilidad}
+Al tratarse de un trabajo teórico y de simulación, la factibilidad precipita en la necesidad de una central de computo para correr los algoritmos *[ver como resolver esto]* y el manejo de las tecnologías propias del trabajo. Dentro de los contenidos necesarios se destacan estas materias curriculares:
+\begin{itemize}
+\item Sistemas de Control.
+\item Sistemas controlados por computadora.
+\item Procesamiento digital de señales.
+\item Técnicas digitales II.
+\end{itemize}
+
+Algunos de los temas extracurriculares son:
+\begin{itemize}
+\item Manejo de lenguajes de programación: python y C++.
+\item Uso de control de versiones GIT.
+\item Manejo de sistema operativo Linux.
+\item Manejo de Gazebo: simulador 3D dinámico especializado en robots.
+\item Manejo de la red ROS.
+\end{itemize}
+
+Como muchas de estas tecnologías no son el foco principal durante la carrera de grado, se destinará un lapso de tiempo prudente para adquirir el manejo necesario para alcanzar los objetivos propuestos. 
+
+El director de este trabajo se encuentra cursando un doctorado en sistemas de control, es ayudante de primera en la materia sistemas de control en la carrera de electrónica, cuenta con experiencia usando el simulador antes mencionado, modelando e implementando dispositivos móviles  y maneja las otras tecnologías mencionadas previamente *[Cita necesaria RPIC]* . Considerando además que dispone de tiempo para la dirección de este trabajo, esto garantiza de que los objetivos planteados puedan realizarse dentro de los tiempos propuestos. 
+\section{Metodología}
+
+\subsection{Actividades específicas}
+A continuación se enumeran las actividades propuestas para los objetivos propuestos:
+
+\begin{enumerate}
+\item Estudio del modelado cinemático de los robots con configuración SSMR.
+\item Estudio e implementación de técnicas de identificación paramétricas enfocado a robots SSMR. 
+\item Estudio de diferentes controladores utilizados comúnmente en la bibliografía para robots con configuración SSMR. 
+\item Setup de las tecnologías a utilizar. 
+\item Modelado dinámico 3D del robot dentro del entorno de simulación en formatos SDF y URDF. Utilizando objetos mallados en formato Collada y STL. 
+\item Implementación de dichas estrategias de control en un script  de python version 3 o superior. 
+\item Registrar los resultados obtenidos y compararlos con los obtenidos en la bibliografía.
+\item Estudio de la tecnología a utilizar.
+\item Documentación. 
+\item Redacción y escritura del informe final. 
+\end{enumerate}
+En la figura \ref{fig:gantt} se muestra el diagrama de Gantt  para las actividades propuestas.
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.7]{./figuras/gantt.png}
+\caption{Diagrama de Gantt propuesto para el trabajo a realizar.}
+\label{fig:gantt}
+\end{figure}
+\section{Bibliografía orientativa}
+\bibliographystyle{apalike}%\biboptions{authoryear}
+\bibliography{bibliografia}
+
+
+
+
+
+
+% OJO!! ##########################################################################3
+\end{document}
